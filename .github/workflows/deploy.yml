@@ -17,11 +17,30 @@ jobs:
           username: ${{ secrets.VM_USER }}
           key: ${{ secrets.SSH_KEY }}
           script: |
+            set -e
+
+            echo "📦 Navigating to project..."
             cd ~/OpenGen-AI
+
+            echo "⬇️ Pulling latest code..."
             git pull origin main
 
+            echo "🐍 Activating virtual environment..."
             source venv/bin/activate
 
-            pkill -f opengen_ai || true
+            echo "📚 Installing dependencies..."
+            pip install -r requirements.txt
 
-            gunicorn opengen_ai.wsgi:application --bind 0.0.0.0:8000 --daemon
+            echo "🛑 Stopping existing OpenGen AI process (if running)..."
+            pkill -f "gunicorn opengen_ai" || echo "No existing process found"
+
+            echo "⏳ Waiting for process to fully stop..."
+            sleep 2
+
+            echo "🚀 Starting OpenGen AI..."
+            nohup gunicorn opengen_ai.wsgi:application \
+              --bind 0.0.0.0:8000 \
+              --workers 2 \
+              > gunicorn.log 2>&1 &
+
+            echo "✅ Deployment complete!"
