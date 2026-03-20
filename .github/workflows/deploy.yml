@@ -32,9 +32,9 @@ jobs:
             pip install -r requirements.txt
 
             echo "🛑 Stopping existing OpenGen AI process (if running)..."
-            pkill -f "gunicorn opengen_ai" || echo "No existing process found"
+            ps aux | grep "gunicorn opengen_ai" | grep -v grep | awk '{print $2}' | xargs -r kill || echo "No process found"
 
-            echo "⏳ Waiting for process to fully stop..."
+            echo "⏳ Waiting..."
             sleep 2
 
             echo "🚀 Starting OpenGen AI..."
