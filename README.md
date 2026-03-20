@@ -158,4 +158,4 @@ curl https://api.opengen.ai/api/v1/api-keys/ -X POST \
 
 ## 📚 More
 
-See additional documentation in the `doc/` directory.
+See additional documentation in the `doc/` directory :).
