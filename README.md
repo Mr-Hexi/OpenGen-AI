@@ -1,24 +1,22 @@
 # OpenGen AI
 
-**OpenGen AI** is a simple AI API that lets you generate responses using open-source models.
+**OpenGen AI** is a lightweight AI API powered by open-source models, designed to be simple, fast, and easy to use.
 
-You don’t need to install anything or manage models — just send a request and get a response.
+It allows developers to integrate AI into their applications using a clean HTTP API — no setup, no model management, no infrastructure required.
 
 ---
 
-## 🚀 Quick Start
-
-### Endpoint
+## 🌐 Base URL
 
 ```text
-https://api.opengen.ai/api/v1/chat/completions/
+https://opengen-ai.duckdns.org/api/v1/
 ```
 
 ---
 
-### Authentication
+## 🔐 Authentication
 
-Every request requires an API key:
+All requests require an API key:
 
 ```text
 Authorization: Bearer sk-opengen-xxxxxxxx
@@ -26,12 +24,33 @@ Authorization: Bearer sk-opengen-xxxxxxxx
 
 ---
 
-## 💡 Example
+## 🔑 Create API Key
+
+To generate an API key:
+
+```bash
+curl -X POST https://opengen-ai.duckdns.org/api/v1/api-keys/ \
+  -H "x-admin-key: YOUR_ADMIN_SECRET"
+```
+
+### Response
+
+```json
+{
+  "api_key": "sk-opengen-xxxxxxxx"
+}
+```
+
+> ⚠️ Keep your API key secure. It will not be shown again.
+
+---
+
+## 💡 Example Usage
 
 ### cURL
 
 ```bash
-curl https://api.opengen.ai/api/v1/chat/completions/ \
+curl https://opengen-ai.duckdns.org/api/v1/chat/completions/ \
   -H "Authorization: Bearer sk-opengen-your-key" \
   -H "Content-Type: application/json" \
   -d '{
@@ -49,7 +68,7 @@ curl https://api.opengen.ai/api/v1/chat/completions/ \
 import requests
 
 response = requests.post(
-    "https://api.opengen.ai/api/v1/chat/completions/",
+    "https://opengen-ai.duckdns.org/api/v1/chat/completions/",
     headers={
         "Authorization": "Bearer sk-opengen-your-key"
     },
@@ -90,7 +109,7 @@ print(response.json())
       "index": 0,
       "message": {
         "role": "assistant",
-        "content": "Hello! How can I help you?"
+        "content": "Hello! How can I assist you?"
       },
       "finish_reason": "stop"
     }
@@ -129,33 +148,26 @@ All errors follow this format:
 
 ---
 
-## 🔑 Create API Key
+## 🧠 Notes
 
-```bash
-curl https://api.opengen.ai/api/v1/api-keys/ -X POST \
-  -H "x-admin-key: opengen-admin-secret-key-123"
-```
-
-### Response
-
-```json
-{
-  "api_key": "sk-opengen-xxxxxxxx"
-}
-```
-
-> Save your API key securely. It will not be shown again.
+* Powered by open-source AI models
+* Designed for low-resource environments
+* Runs on your own infrastructure
 
 ---
 
-## 🧠 Notes
+## 🚀 Deployment
 
-* Uses open-source AI models
-* Designed to be fast and lightweight
-* Works with simple HTTP requests
+OpenGen AI is deployed on a cloud VM with:
+
+* Django REST API
+* Gunicorn
+* Nginx (reverse proxy)
+* HTTPS (SSL)
+* Automated deployment via GitHub Actions
 
 ---
 
 ## 📚 More
 
-See additional documentation in the `doc/` directory :).
+See additional documentation in the `doc/` directory.
