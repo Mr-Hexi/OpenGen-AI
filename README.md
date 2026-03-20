@@ -1,8 +1,8 @@
 # OpenGen AI
 
-**OpenGen AI** is a lightweight, OpenAI-compatible AI API powered by open-source models.
+**OpenGen AI** is a simple AI API that lets you generate responses using open-source models.
 
-It allows developers to integrate AI into their applications using a simple HTTP API — no setup, no model management, no infrastructure required.
+You don’t need to install anything or manage models — just send a request and get a response.
 
 ---
 
@@ -18,7 +18,7 @@ https://api.opengen.ai/api/v1/chat/completions/
 
 ### Authentication
 
-Use your API key:
+Every request requires an API key:
 
 ```text
 Authorization: Bearer sk-opengen-xxxxxxxx
@@ -26,7 +26,7 @@ Authorization: Bearer sk-opengen-xxxxxxxx
 
 ---
 
-## 💡 Example Request
+## 💡 Example
 
 ### cURL
 
@@ -43,7 +43,7 @@ curl https://api.opengen.ai/api/v1/chat/completions/ \
 
 ---
 
-### Python Example
+### Python
 
 ```python
 import requests
@@ -113,7 +113,7 @@ All errors follow this format:
 }
 ```
 
-Common status codes:
+### Common Status Codes
 
 * `401` → Invalid API key
 * `429` → Rate limit exceeded
@@ -125,15 +125,7 @@ Common status codes:
 ## ⚡ Limits
 
 * Max request size: 10,000 characters
-* Rate limit: 10 requests/minute per API key
-
----
-
-## 🧠 Notes
-
-* Fully compatible with OpenAI-style APIs
-* Powered by open-source models
-* Designed for fast, low-cost inference
+* Rate limit: 10 requests per minute per API key
 
 ---
 
@@ -144,15 +136,26 @@ curl https://api.opengen.ai/api/v1/api-keys/ -X POST \
   -H "x-admin-key: opengen-admin-secret-key-123"
 ```
 
-**Response:**
+### Response
+
 ```json
 {
   "api_key": "sk-opengen-xxxxxxxx"
 }
 ```
 
+> Save your API key securely. It will not be shown again.
+
+---
+
+## 🧠 Notes
+
+* Uses open-source AI models
+* Designed to be fast and lightweight
+* Works with simple HTTP requests
+
 ---
 
 ## 📚 More
 
-See full documentation in the `doc/` directory.
+See additional documentation in the `doc/` directory.
